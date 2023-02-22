@@ -6,7 +6,7 @@
 /*   By: fvonsovs <fvonsovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:09:18 by fvonsovs          #+#    #+#             */
-/*   Updated: 2023/02/22 17:00:55 by fvonsovs         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:07:19 by fvonsovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char *argv[], char *envp[])
 		if (argc < 6)
 			you_fucked_up(argv[0]);
 		i = 3;
-		out = open()
+		out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
 
 	}
 	else
