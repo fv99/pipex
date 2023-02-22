@@ -6,7 +6,7 @@
 /*   By: fvonsovs <fvonsovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:09:18 by fvonsovs          #+#    #+#             */
-/*   Updated: 2023/02/21 18:04:06 by fvonsovs         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:00:55 by fvonsovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,36 @@
 // a modified set of environment variables to a child process.
 int	main(int argc, char *argv[], char *envp[])
 {
+	int	in;
+	int	out;
+	int	i;
+
  	if (argc != 5)
- 		return (ft_printf("Usage: %s <file1> <cmd1> <cmd2> <file2>\n", argv[0]););
+ 		you_fucked_up(argv[0]);
+	else if (argv[1] = "here_doc")
+	{
+		if (argc < 6)
+			you_fucked_up(argv[0]);
+		i = 3;
+		out = open()
+
+	}
+	else
+
+
+}
+
+int	you_fucked_up(char msg)
+{
+	ft_printf("Usage: %s <option> <file1> <cmd1> <cmd2> ... <file2>\n", msg));
+	exit(0);
+}
+
+int	here_doc(int in, int out, char cmd1, char cmd2)
+{
 
 
 
 
 
-
-	
 }
