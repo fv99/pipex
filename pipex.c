@@ -6,7 +6,7 @@
 /*   By: fvonsovs <fvonsovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:09:18 by fvonsovs          #+#    #+#             */
-/*   Updated: 2023/02/27 18:20:58 by fvonsovs         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:38:39 by fvonsovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,12 @@ void	execute(char *cmd, char **envp)
 	if (execve(path, command, envp) == -1)
 	{
 		ft_printf("Command not found: %s \n", command[0]);
-		free_double_pointer(command);
+		free_array(command);
 		exit(0);
 	}
 }
 
-void	free_double_pointer(char	**ptr)
+void	free_array(char	**ptr)
 {
 	size_t	i;
 
@@ -142,24 +142,27 @@ void	free_double_pointer(char	**ptr)
 	free(ptr);
 }
 
-char	*getenv(char *name, char **envp)
-{
-	int		i;
-	int		j;
-	char	*sub;
+char	*get_path_token
 
-
-}
 
 char	*get_path(char *cmd, char **envp)
 {
 	int		i;
-	char	*exec;
-	char	*path;
-	char	**fullpath;
-	char	**command;
+	char	*path_env;
+	char	*path_token;
+	int		cmd_len;
 
-	i = -1;
-	fullpath = ft_split(getenv)
+	i = 0;
+	cmd_len = ft_strlen(cmd);
+	while (envp[i] != NULL)
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		{
+			path_env = ft_strdup(envp[i] + 5);
+			break;
+		}
+		i++;
+	}
+	// function to search for path token here:
 
 }

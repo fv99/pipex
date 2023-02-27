@@ -6,7 +6,7 @@
 /*   By: fvonsovs <fvonsovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:17:27 by fvonsovs          #+#    #+#             */
-/*   Updated: 2023/02/22 16:10:24 by fvonsovs         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:35:06 by fvonsovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@
 
 # include "./libft/libft.h"
 
-
+# define PATH_SEP = ":"
 
 #endif
