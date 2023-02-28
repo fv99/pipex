@@ -6,53 +6,22 @@
 /*   By: fvonsovs <fvonsovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:09:18 by fvonsovs          #+#    #+#             */
-/*   Updated: 2023/02/27 18:38:39 by fvonsovs         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:53:33 by fvonsovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// The char *envp[] argument is a pointer to an 
-// array of strings that represent the environment
-// variables for the current process. In C, environment variables
-// are stored as a list of key-value pairs, where the keys and values are strings.
-// The char *envp[] argument is a way to access the environment variables 
-// in a more flexible way. It is typically used in programs
-// that need to modify the environment variables or pass
-// a modified set of environment variables to a child process.
-int	main(int argc, char *argv[], char *envp[])
-{
-	int	in;
-	int	out;
-	int	i;
+#include "pipex.h"
 
- 	if (argc != 5)
- 		you_fucked_up(argv[0]);
-	else if (argv[1] == "here_doc")
-	{
-		if (argc < 6)
-			you_fucked_up(argv[0]);
-		i = 3;
-		out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
-		here_doc(argv);
-	}
-	else
-	{
-		i = 2;
-		in = open(argv[1], O_RDONLY, 0777);
-		out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-		dup2(in, 0);
-	}
-	while (i < (ac - 2))
-		pipex(av[i++], envp);
-	dup2(out, 1);
-	exec(argv[argc - 2], envp);
-}
-
-int	you_fucked_up(char msg)
+// Yeah you did))
+int	you_fucked_up(char *msg)
 {
-	ft_printf("Usage: %s <option> <file1> <cmd1> <cmd2> ... <file2>\n", msg));
+	ft_printf("Usage: %s <option> <file1> <cmd1> <cmd2> ... <file2>\n", msg);
 	exit(0);
 }
 
+// Creates pipe storing its fd in pid_fd
+// Forks a new process, storing pid in pid
+// Calls here_doc_exec 
 void	here_doc(char **argv)
 {
 	int		pid_fd[2];
@@ -83,7 +52,7 @@ void	here_doc_exec(char **argv, int *pid_fd)
 		line = get_next_line(0);
 		if (ft_strncmp(line, argv[2], ft_strlen(argv[2])) == 0)
 		{
-			free(ret);
+			free(line);
 			exit(0);
 		}
 		ft_printf("%s", line);
@@ -120,7 +89,7 @@ void	execute(char *cmd, char **envp)
 	char	*path;
 
 	command = ft_split(cmd, ' ');
-	path = get_path(command[0], env);
+	path = get_path(command[0], envp);
 	if (execve(path, command, envp) == -1)
 	{
 		ft_printf("Command not found: %s \n", command[0]);
@@ -128,41 +97,39 @@ void	execute(char *cmd, char **envp)
 		exit(0);
 	}
 }
-
-void	free_array(char	**ptr)
+// The char *envp[] argument is a pointer to an 
+// array of strings that represent the environment
+// variables for the current process. In C, environment variables
+// are stored as a list of key-value pairs, where the keys and values are strings.
+// The char *envp[] argument is a way to access the environment variables 
+// in a more flexible way. It is typically used in programs
+// that need to modify the environment variables or pass
+// a modified set of environment variables to a child process.
+int	main(int argc, char *argv[], char *envp[])
 {
-	size_t	i;
+	int	in;
+	int	out;
+	int	i;
 
-	i = 0;
-	while(ptr[i])
+ 	if (argc < 5)
+ 		you_fucked_up(argv[0]);
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 	{
-		free(ptr[i]);
-		i++;
+		if (argc < 6)
+			you_fucked_up(argv[0]);
+		i = 3;
+		out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
+		here_doc(argv);
 	}
-	free(ptr);
-}
-
-char	*get_path_token
-
-
-char	*get_path(char *cmd, char **envp)
-{
-	int		i;
-	char	*path_env;
-	char	*path_token;
-	int		cmd_len;
-
-	i = 0;
-	cmd_len = ft_strlen(cmd);
-	while (envp[i] != NULL)
+	else
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-		{
-			path_env = ft_strdup(envp[i] + 5);
-			break;
-		}
-		i++;
+		i = 2;
+		in = open(argv[1], O_RDONLY, 0777);
+		out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		dup2(in, 0);
 	}
-	// function to search for path token here:
-
+	while (i < (argc - 2))
+		pipex(argv[i++], envp);
+	dup2(out, 1);
+	execute(argv[argc - 2], envp);
 }

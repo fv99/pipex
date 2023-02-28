@@ -6,14 +6,14 @@
 #    By: fvonsovs <fvonsovs@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 16:09:49 by fvonsovs          #+#    #+#              #
-#    Updated: 2023/02/22 16:10:10 by fvonsovs         ###   ########.fr        #
+#    Updated: 2023/02/28 15:52:12 by fvonsovs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
-NAME		=	pipex.a
-SRCS		=	pipex.c
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g
+NAME		=	pipex
+SRCS		=	pipex.c pipex_utils.c
 INCS		=	pipex.h
 OBJS		=	${SRCS:.c=.o}
 LIBC		=	ar -cvq
@@ -21,14 +21,13 @@ RM			=	rm -f
 LIBFT		=	./libft/libft.a
 
 .c.o:
-	gcc ${CFLAGS} -c $< -o ${<:.c=.o} -I.
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I. -I./libft
 
 all: $(NAME)
 
 $(NAME): ${OBJS}
 	make -C ./libft
-	cp ./libft/libft.a ${NAME}
-	${LIBC} ${NAME} ${OBJS}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
 
 clean: 
 	${MAKE} clean -C ./libft
