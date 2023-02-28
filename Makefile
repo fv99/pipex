@@ -6,14 +6,14 @@
 #    By: fvonsovs <fvonsovs@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/22 16:09:49 by fvonsovs          #+#    #+#              #
-#    Updated: 2023/02/28 15:52:12 by fvonsovs         ###   ########.fr        #
+#    Updated: 2023/02/28 16:06:44 by fvonsovs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g
 NAME		=	pipex
-SRCS		=	pipex.c pipex_utils.c
+SRCS		=	main.c pipex.c pipex_utils.c
 INCS		=	pipex.h
 OBJS		=	${SRCS:.c=.o}
 LIBC		=	ar -cvq

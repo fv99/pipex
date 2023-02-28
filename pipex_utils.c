@@ -6,7 +6,7 @@
 /*   By: fvonsovs <fvonsovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:05:00 by fvonsovs          #+#    #+#             */
-/*   Updated: 2023/02/28 15:56:06 by fvonsovs         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:03:23 by fvonsovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_array(char	**ptr)
 	size_t	i;
 
 	i = 0;
-	while(ptr[i])
+	while (ptr[i])
 	{
 		free(ptr[i]);
 		i++;
@@ -45,7 +45,7 @@ char	*ft_strtok(char *str, char sep)
 {
 	static char	*stock = NULL;
 	char		*ptr;
-	int		i;
+	int			i;
 
 	i = 0;
 	ptr = NULL;
@@ -53,14 +53,12 @@ char	*ft_strtok(char *str, char sep)
 		stock = ft_strdup(str);
 	while (*stock != '\0')
 	{
-		if (i == 0 && *stock != sep
-	)
+		if (i == 0 && *stock != sep)
 		{
 			i = 1;
 			ptr = stock;
 		}
-		else if (i == 1 && *stock == sep
-	)
+		else if (i == 1 && *stock == sep)
 		{
 			*stock = '\0';
 			stock += 1;
@@ -88,12 +86,12 @@ char	*get_path(char *cmd, char **envp)
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 		{
 			path_env = ft_strdup(envp[i] + 5);
-			break;
+			break ;
 		}
 		i++;
 	}
 	path = get_path_token(cmd, path_env, cmd_len);
-	return(path);
+	return (path);
 }
 
 // Searches through each path in the PATH environment variable
@@ -112,10 +110,10 @@ char	*get_path_token(char *cmd, char *path_env, int cmd_len)
 		ft_strcat(path, path_token);
 		ft_strcat(path, "/");
 		ft_strcat(path, cmd);
-		if(access(path, X_OK) == 0)
+		if (access (path, X_OK) == 0)
 		{
 			free(path_env);
-			return(path);
+			return (path);
 		}
 		free(path);
 		path_token = ft_strtok(NULL, PATH_SEP);

@@ -6,7 +6,7 @@
 /*   By: fvonsovs <fvonsovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:17:27 by fvonsovs          #+#    #+#             */
-/*   Updated: 2023/02/28 15:22:13 by fvonsovs         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:03:39 by fvonsovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # define PATH_SEP ':'
 
-int	you_fucked_up(char *msg);
+int		you_fucked_up(char *msg);
 
 void	free_array(char	**ptr);
 
@@ -44,6 +44,6 @@ void	pipex(char *cmd, char **envp);
 
 void	execute(char *cmd, char **envp);
 
-char *ft_strcat(char *dest, char *src);
+char	*ft_strcat(char *dest, char *src);
 
 #endif
