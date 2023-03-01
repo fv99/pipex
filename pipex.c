@@ -6,7 +6,7 @@
 /*   By: fvonsovs <fvonsovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:09:18 by fvonsovs          #+#    #+#             */
-/*   Updated: 2023/02/28 16:06:29 by fvonsovs         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:32:49 by fvonsovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ void	here_doc_exec(char **argv, int *pid_fd)
 	while (1)
 	{
 		line = get_next_line(0);
+		if (!line)
+		{
+			free(line);
+			exit(0);
+		}
 		if (ft_strncmp(line, argv[2], ft_strlen(argv[2])) == 0)
 		{
 			free(line);
